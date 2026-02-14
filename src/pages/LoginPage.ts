@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { SoftAssert } from 'src/assertions/SoftAssert';
 
 export class LoginPage extends BasePage {
 
@@ -10,7 +11,7 @@ export class LoginPage extends BasePage {
   async login(user:string, pass:string){
     await this.click('.ico-login');
     await this.fill('#Email', user);
-    await this.fill('#assword', pass);
+    await this.fill('#Password', pass);
     await this.click('.login-button');
   }
 
