@@ -1,0 +1,31 @@
+{
+  "name": "playwright_ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:qa": "TEST_ENV=qa npx playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.6.0",
+    "@playwright/test": "^1.58.2",
+    "@types/pg": "^8.16.0",
+    "allure-commandline": "^2.36.0",
+    "allure-cucumberjs": "^3.4.5",
+    "allure-playwright": "^3.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "lodash": "^4.17.23",
+    "pg": "^8.18.0",
+    "uuid": "^13.0.0",
+    "winston": "^3.19.0"
+  }
+}
