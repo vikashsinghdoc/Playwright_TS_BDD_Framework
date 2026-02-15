@@ -2,6 +2,9 @@ import { test } from "@playwright/test";
 import { execSync } from "child_process";
 
 test("Run BDD Tests", async () => {
+  const parallel = process.env.PARALLEL || "1";
+  const retries = process.env.RETRIES || "0";
+
   try {
     execSync(
       `npx cucumber-js \
@@ -12,7 +15,9 @@ test("Run BDD Tests", async () => {
       --require features/step-definitions/**/*.ts \
       --format progress \
       --format allure-cucumberjs/reporter \
-      --format-options '{"resultsDir":"allure-results"}'`,
+      --format-options '{"resultsDir":"allure-results"}' \
+      --parallel ${parallel} \
+      --retry ${retries}`,
       {
         stdio: "inherit",
         env: process.env
