@@ -16,6 +16,6 @@ export class LoginPage extends BasePage {
   }
 
   async validateLogin() {
-    await expect(this.page.locator(".ico-logout")).toHaveText("Log out");
+    await expect(this.page.locator(".ico-logout")).toHaveText("Log ou");
   }
 }
