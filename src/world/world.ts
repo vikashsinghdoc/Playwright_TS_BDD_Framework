@@ -1,35 +1,60 @@
-import { setWorldConstructor } from "@cucumber/cucumber";
-import { AllureCucumberWorld } from "allure-cucumberjs";
+import { setWorldConstructor, World } from "@cucumber/cucumber";
 import {
   chromium,
   firefox,
   webkit,
   Browser,
-  Page,
-  BrowserContext
+  BrowserContext,
+  Page
 } from "@playwright/test";
 import { createScenarioLogger } from "../logger/logger";
 import { LoginPage } from "../pages/LoginPage";
 
-export class CustomWorld extends AllureCucumberWorld {
+/**
+ * Custom Cucumber World
+ * Modern implementation (No deprecated AllureCucumberWorld)
+ */
+export class CustomWorld extends World {
   browser!: Browser;
   context!: BrowserContext;
   page!: Page;
-  logger: any;
+
+  logger!: {
+    info: (message: string) => Promise<void>;
+    error: (message: string) => Promise<void>;
+  };
+
   loginPage!: LoginPage;
+
+  private _lastAction: string = "";
+
+  get lastAction() {
+    return this._lastAction;
+  }
 
   async init(scenarioName: string, scenarioId: string) {
     const baseLogger = createScenarioLogger(scenarioName, scenarioId);
 
-    // Logger wrapper → logs to file + console + Allure attachment
+    const isDebug =
+      process.env.DEBUG?.trim().toLowerCase() === "true";
+
+    // 🔥 Logger Wrapper
     this.logger = {
       info: async (message: string) => {
         baseLogger.info(message);
-        await this.attach(message, "text/plain");
+        this._lastAction = message;
+
+        if (isDebug) {
+          await this.attach(message, "text/plain");
+        }
       },
+
       error: async (message: string) => {
         baseLogger.error(message);
-        await this.attach(`ERROR: ${message}`, "text/plain");
+
+        if (isDebug) {
+          await this.attach(`ERROR: ${message}`, "text/plain");
+        }
       }
     };
 
@@ -40,13 +65,13 @@ export class CustomWorld extends AllureCucumberWorld {
     const browserType =
       process.env.BROWSER?.trim().toLowerCase() || "chromium";
 
-    const browserMap: any = {
+    const browserMap = {
       chromium,
       firefox,
       webkit
     };
 
-    if (!browserMap[browserType]) {
+    if (!browserMap[browserType as keyof typeof browserMap]) {
       throw new Error(
         `Unsupported browser: ${browserType}. Use chromium | firefox | webkit`
       );
@@ -63,12 +88,14 @@ export class CustomWorld extends AllureCucumberWorld {
     // Launch Browser
     // ================================
 
-    this.browser = await browserMap[browserType].launch({
+    this.browser = await browserMap[
+      browserType as keyof typeof browserMap
+    ].launch({
       headless: isHeadless,
       slowMo
     });
 
-    // 🔥 Context per scenario (better isolation)
+    // Context per scenario (Parallel-safe)
     this.context = await this.browser.newContext();
     this.page = await this.context.newPage();
 

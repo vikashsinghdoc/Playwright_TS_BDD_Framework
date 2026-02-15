@@ -9,6 +9,7 @@ export class BasePage {
   async click(locator: string) {
     try {
       this.logger.info(`Clicking element: ${locator}`);
+      await this.highlight(locator)
 
       const element = this.page.locator(locator);
       await element.waitFor({ state: "visible" });
@@ -24,6 +25,7 @@ export class BasePage {
   async fill(locator: string, value: string) {
     try {
       this.logger.info(`Filling element: ${locator}`);
+      await this.highlight(locator)
 
       const element = this.page.locator(locator);
       await element.waitFor({ state: "visible" });
@@ -55,5 +57,16 @@ export class BasePage {
   async takeScreenshot(): Promise<Buffer> {
     this.logger.info("Capturing screenshot");
     return await this.page.screenshot({ fullPage: true });
+  }
+  async highlight(locator: string) {
+    try {
+      await this.page.locator(locator).evaluate((el) => {
+        (el as HTMLElement).style.outline = "4px solid red";
+        (el as HTMLElement).style.backgroundColor =
+          "rgba(255,0,0,0.15)";
+      });
+    } catch (e) {
+      // Ignore highlight errors
+    }
   }
 }
