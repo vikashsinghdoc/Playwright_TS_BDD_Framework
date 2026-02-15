@@ -5,45 +5,50 @@ import {
   webkit,
   Browser,
   BrowserContext,
-  Page
+  Page,
+  BrowserType
 } from "@playwright/test";
 import { createScenarioLogger } from "../logger/logger";
 import { LoginPage } from "../pages/LoginPage";
 
-/**
- * Custom Cucumber World
- * Modern implementation (No deprecated AllureCucumberWorld)
- */
+type Logger = {
+  info: (message: string) => Promise<void>;
+  error: (message: string) => Promise<void>;
+};
+
+type SupportedBrowser = "chromium" | "firefox" | "webkit";
+
 export class CustomWorld extends World {
   browser!: Browser;
   context!: BrowserContext;
   page!: Page;
 
-  logger!: {
-    info: (message: string) => Promise<void>;
-    error: (message: string) => Promise<void>;
-  };
-
+  logger!: Logger;
   loginPage!: LoginPage;
 
   private _lastAction: string = "";
 
-  get lastAction() {
+  get lastAction(): string {
     return this._lastAction;
   }
 
-  async init(scenarioName: string, scenarioId: string) {
+  async init(scenarioName: string, scenarioId: string): Promise<void> {
     const baseLogger = createScenarioLogger(scenarioName, scenarioId);
 
     const isDebug =
       process.env.DEBUG?.trim().toLowerCase() === "true";
 
-    // 🔥 Logger Wrapper
+    // ================================
+    // Logger Wrapper
+    // ================================
     this.logger = {
       info: async (message: string) => {
         baseLogger.info(message);
+
+        // Always track last action
         this._lastAction = message;
 
+        // Only attach logs in DEBUG mode
         if (isDebug) {
           await this.attach(message, "text/plain");
         }
@@ -62,18 +67,19 @@ export class CustomWorld extends World {
     // ENV CONFIG
     // ================================
 
-    const browserType =
-      process.env.BROWSER?.trim().toLowerCase() || "chromium";
+    const browserName = (
+      process.env.BROWSER?.trim().toLowerCase() || "chromium"
+    ) as SupportedBrowser;
 
-    const browserMap = {
+    const browserMap: Record<SupportedBrowser, BrowserType> = {
       chromium,
       firefox,
       webkit
     };
 
-    if (!browserMap[browserType as keyof typeof browserMap]) {
+    if (!browserMap[browserName]) {
       throw new Error(
-        `Unsupported browser: ${browserType}. Use chromium | firefox | webkit`
+        `Unsupported browser: ${browserName}. Use chromium | firefox | webkit`
       );
     }
 
@@ -81,16 +87,14 @@ export class CustomWorld extends World {
       process.env.HEADLESS?.trim().toLowerCase() === "true";
 
     const slowMo = process.env.SLOWMO
-      ? parseInt(process.env.SLOWMO)
+      ? Number(process.env.SLOWMO)
       : 0;
 
     // ================================
     // Launch Browser
     // ================================
 
-    this.browser = await browserMap[
-      browserType as keyof typeof browserMap
-    ].launch({
+    this.browser = await browserMap[browserName].launch({
       headless: isHeadless,
       slowMo
     });
@@ -106,7 +110,7 @@ export class CustomWorld extends World {
     this.loginPage = new LoginPage(this.page, this.logger);
   }
 
-  async close() {
+  async close(): Promise<void> {
     await this.context?.close();
     await this.browser?.close();
   }
