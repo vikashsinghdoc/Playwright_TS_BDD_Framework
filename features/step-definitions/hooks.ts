@@ -1,64 +1,66 @@
-import { Before, After, Status, AfterStep } from '@cucumber/cucumber';
-import { testContext } from '../../src/fixture/testContext'
-import * as fs from 'fs';
-import * as path from 'path';
+import { Before, After, BeforeStep, AfterStep, Status } from "@cucumber/cucumber";
 
-let failedStepScreenshot: Buffer | null = null;
-let currentScenarioId: string | null = null;
-let screenshotsMetadata: Array<{ scenarioId: string; fileName: string }> = [];
+import { testContext } from "../../src/fixture/testContext";
+import { createScenarioLogger } from "../../src/logger/logger";
 
-Before(async function(scenario) {
-  currentScenarioId = scenario.pickle.id;
-  failedStepScreenshot = null;
+let scenarioLogger: any;
+
+Before(async function (scenario) {
+  const scenarioName = scenario.pickle.name;
+  const scenarioId = scenario.pickle.id.substring(0, 8);
+
+  scenarioLogger = createScenarioLogger(scenarioName, scenarioId);
+  this.logger = scenarioLogger;
+
+  const startMessage = `START SCENARIO: ${scenarioName}`;
+  scenarioLogger.info(startMessage);
+
+  // Appears under "Set up"
+  await this.attach(startMessage, "text/plain");
+
   await testContext.init();
 });
 
-AfterStep(async (step) => {
-  if (step.result?.status === Status.FAILED) {
-    console.log('Capturing screenshot on step failure...');
-    try {
-      const screenshot = await testContext.page.screenshot();
-      failedStepScreenshot = screenshot;
-    } catch (error) {
-      console.error('Failed to capture step screenshot:', error);
-    }
+BeforeStep(async function ({ pickleStep }) {
+  const message = `STEP: ${pickleStep.text}`;
+
+  this.logger.info(message);
+
+  // Appears inside that specific step
+  await this.attach(message, "text/plain");
+});
+
+AfterStep(async function ({ pickleStep, result }) {
+  if (result?.status === Status.FAILED) {
+    const errorMessage = result.message || "Step failed";
+
+    this.logger.error(`FAILED STEP: ${pickleStep.text}`);
+    this.logger.error(errorMessage);
+
+    // Attach error inside failed step
+    await this.attach(errorMessage, "text/plain");
+
+    // Attach screenshot
+    const screenshot = await testContext.page.screenshot({
+      fullPage: true
+    });
+
+    await this.attach(screenshot, "image/png");
   }
 });
 
-After(async (scenario) => {
-  try {
-    if (scenario.result?.status === Status.FAILED && failedStepScreenshot && currentScenarioId) {
-      console.log('Saving screenshot for failed scenario...');
-      const allureDir = './allure-results';
-      
-      // Ensure directory exists
-      if (!fs.existsSync(allureDir)) {
-        fs.mkdirSync(allureDir, { recursive: true });
-      }
-      
-      // Generate screenshot filename - use scenario ID for predictability
-      const screenshotName = `screenshot-${currentScenarioId.substring(0, 8)}-${Date.now()}.png`;
-      const screenshotPath = path.join(allureDir, screenshotName);
-      
-      // Write screenshot to disk
-      fs.writeFileSync(screenshotPath, failedStepScreenshot);
-      console.log(`Screenshot saved: ${screenshotName}`);
-      
-      // Save metadata for post-processing
-      screenshotsMetadata.push({
-        scenarioId: currentScenarioId,
-        fileName: screenshotName
-      });
-      
-      // Write metadata to a temp file for cucumber runner to process
-      const metadataFile = path.join(allureDir, '.screenshots-metadata.json');
-      fs.writeFileSync(metadataFile, JSON.stringify(screenshotsMetadata));
-    }
-  } catch (error) {
-    console.error('Failed to process screenshot:', error);
-  } finally {
-    await testContext.close();
-    failedStepScreenshot = null;
-    currentScenarioId = null;
-  }
+After(async function (scenario) {
+  const scenarioName = scenario.pickle.name;
+
+  const endMessage =
+    scenario.result?.status === Status.PASSED
+      ? `SCENARIO PASSED`
+      : `SCENARIO FAILED`;
+
+  this.logger.info(`${endMessage}: ${scenarioName}`);
+
+  // Appears under "Tear down"
+  await this.attach(`${endMessage}: ${scenarioName}`, "text/plain");
+
+  await testContext.close();
 });

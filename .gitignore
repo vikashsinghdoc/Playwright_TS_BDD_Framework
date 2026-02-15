@@ -7,3 +7,4 @@ dist/
 playwright-report/
 .vscode/
 .DS_Store/
+.logs/

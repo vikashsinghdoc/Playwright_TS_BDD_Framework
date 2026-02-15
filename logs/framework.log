@@ -1,0 +1,56 @@
+{"level":"info","message":"========== START SCENARIO: Successful_login ==========","scenario":"Successful_login","scenarioId":"7ac78de5","timestamp":"2026-02-14T14:34:53.674Z"}
+{"level":"info","message":"STEP STARTED: user is on login page","scenario":"Successful_login","scenarioId":"7ac78de5","timestamp":"2026-02-14T14:34:55.358Z"}
+{"level":"info","message":"STEP PASSED: user is on login page","scenario":"Successful_login","scenarioId":"7ac78de5","timestamp":"2026-02-14T14:34:57.704Z"}
+{"level":"info","message":"STEP STARTED: user logs in","scenario":"Successful_login","scenarioId":"7ac78de5","timestamp":"2026-02-14T14:34:57.706Z"}
+{"level":"info","message":"STEP PASSED: user logs in","scenario":"Successful_login","scenarioId":"7ac78de5","timestamp":"2026-02-14T14:34:58.967Z"}
+{"level":"info","message":"STEP STARTED: user verifies the login","scenario":"Successful_login","scenarioId":"7ac78de5","timestamp":"2026-02-14T14:34:58.969Z"}
+{"level":"info","message":"STEP PASSED: user verifies the login","scenario":"Successful_login","scenarioId":"7ac78de5","timestamp":"2026-02-14T14:34:58.980Z"}
+{"level":"info","message":"SCENARIO PASSED: Successful login","scenario":"Successful_login","scenarioId":"7ac78de5","timestamp":"2026-02-14T14:34:58.980Z"}
+{"level":"info","message":"========== END SCENARIO ==========\n","scenario":"Successful_login","scenarioId":"7ac78de5","timestamp":"2026-02-14T14:34:58.980Z"}
+{"level":"info","message":"========== START SCENARIO: Successful_login ==========","scenario":"Successful_login","scenarioId":"1cf022a2","timestamp":"2026-02-14T14:37:07.938Z"}
+{"level":"info","message":"STEP STARTED: user is on login page","scenario":"Successful_login","scenarioId":"1cf022a2","timestamp":"2026-02-14T14:37:09.365Z"}
+{"level":"info","message":"STEP PASSED: user is on login page","scenario":"Successful_login","scenarioId":"1cf022a2","timestamp":"2026-02-14T14:37:12.220Z"}
+{"level":"info","message":"STEP STARTED: user logs in","scenario":"Successful_login","scenarioId":"1cf022a2","timestamp":"2026-02-14T14:37:12.221Z"}
+{"level":"info","message":"STEP PASSED: user logs in","scenario":"Successful_login","scenarioId":"1cf022a2","timestamp":"2026-02-14T14:37:13.526Z"}
+{"level":"info","message":"STEP STARTED: user verifies the login","scenario":"Successful_login","scenarioId":"1cf022a2","timestamp":"2026-02-14T14:37:13.527Z"}
+{"level":"info","message":"STEP PASSED: user verifies the login","scenario":"Successful_login","scenarioId":"1cf022a2","timestamp":"2026-02-14T14:37:16.553Z"}
+{"level":"info","message":"SCENARIO PASSED: Successful login","scenario":"Successful_login","scenarioId":"1cf022a2","timestamp":"2026-02-14T14:37:16.553Z"}
+{"level":"info","message":"========== END SCENARIO ==========\n","scenario":"Successful_login","scenarioId":"1cf022a2","timestamp":"2026-02-14T14:37:16.554Z"}
+{"level":"info","message":"========== START SCENARIO: Successful_login ==========","scenario":"Successful_login","scenarioId":"2ac58194","timestamp":"2026-02-14T14:39:50.073Z"}
+{"level":"info","message":"STEP STARTED: user is on login page","scenario":"Successful_login","scenarioId":"2ac58194","timestamp":"2026-02-14T14:39:51.617Z"}
+{"level":"info","message":"STEP PASSED: user is on login page","scenario":"Successful_login","scenarioId":"2ac58194","timestamp":"2026-02-14T14:39:54.162Z"}
+{"level":"info","message":"STEP STARTED: user logs in","scenario":"Successful_login","scenarioId":"2ac58194","timestamp":"2026-02-14T14:39:54.164Z"}
+{"level":"info","message":"STEP PASSED: user logs in","scenario":"Successful_login","scenarioId":"2ac58194","timestamp":"2026-02-14T14:39:55.401Z"}
+{"level":"info","message":"STEP STARTED: user verifies the login","scenario":"Successful_login","scenarioId":"2ac58194","timestamp":"2026-02-14T14:39:55.403Z"}
+{"level":"info","message":"STEP PASSED: user verifies the login","scenario":"Successful_login","scenarioId":"2ac58194","timestamp":"2026-02-14T14:39:58.437Z"}
+{"level":"info","message":"SCENARIO PASSED: Successful login","scenario":"Successful_login","scenarioId":"2ac58194","timestamp":"2026-02-14T14:39:58.437Z"}
+{"level":"info","message":"========== END SCENARIO ==========\n","scenario":"Successful_login","scenarioId":"2ac58194","timestamp":"2026-02-14T14:39:58.438Z"}
+{"level":"info","message":"========== START SCENARIO: Successful_login__2 ==========","scenario":"Successful_login__2","scenarioId":"69bdae68","timestamp":"2026-02-14T14:39:58.537Z"}
+{"level":"info","message":"STEP STARTED: user is on login page","scenario":"Successful_login__2","scenarioId":"69bdae68","timestamp":"2026-02-14T14:39:59.031Z"}
+{"level":"info","message":"STEP PASSED: user is on login page","scenario":"Successful_login__2","scenarioId":"69bdae68","timestamp":"2026-02-14T14:40:01.557Z"}
+{"level":"info","message":"STEP STARTED: user logs in","scenario":"Successful_login__2","scenarioId":"69bdae68","timestamp":"2026-02-14T14:40:01.558Z"}
+{"level":"info","message":"STEP PASSED: user logs in","scenario":"Successful_login__2","scenarioId":"69bdae68","timestamp":"2026-02-14T14:40:02.787Z"}
+{"level":"info","message":"STEP STARTED: user verifies the login","scenario":"Successful_login__2","scenarioId":"69bdae68","timestamp":"2026-02-14T14:40:02.788Z"}
+{"level":"info","message":"STEP PASSED: user verifies the login","scenario":"Successful_login__2","scenarioId":"69bdae68","timestamp":"2026-02-14T14:40:05.811Z"}
+{"level":"info","message":"SCENARIO PASSED: Successful login _2","scenario":"Successful_login__2","scenarioId":"69bdae68","timestamp":"2026-02-14T14:40:05.812Z"}
+{"level":"info","message":"========== END SCENARIO ==========\n","scenario":"Successful_login__2","scenarioId":"69bdae68","timestamp":"2026-02-14T14:40:05.812Z"}
+{"level":"info","message":"START SCENARIO: Successful login","scenario":"Successful login","scenarioId":"74e19495","timestamp":"2026-02-14T14:42:27.210Z"}
+{"level":"info","message":"STEP: user is on login page","scenario":"Successful login","scenarioId":"74e19495","timestamp":"2026-02-14T14:42:28.744Z"}
+{"level":"info","message":"STEP: user logs in","scenario":"Successful login","scenarioId":"74e19495","timestamp":"2026-02-14T14:42:31.273Z"}
+{"level":"info","message":"STEP: user verifies the login","scenario":"Successful login","scenarioId":"74e19495","timestamp":"2026-02-14T14:42:32.607Z"}
+{"level":"info","message":"SCENARIO PASSED: Successful login","scenario":"Successful login","scenarioId":"74e19495","timestamp":"2026-02-14T14:42:35.645Z"}
+{"level":"info","message":"START SCENARIO: Successful login _2","scenario":"Successful login _2","scenarioId":"6b1dffc4","timestamp":"2026-02-14T14:42:35.751Z"}
+{"level":"info","message":"STEP: user is on login page","scenario":"Successful login _2","scenarioId":"6b1dffc4","timestamp":"2026-02-14T14:42:36.311Z"}
+{"level":"info","message":"STEP: user logs in","scenario":"Successful login _2","scenarioId":"6b1dffc4","timestamp":"2026-02-14T14:42:38.873Z"}
+{"level":"info","message":"STEP: user verifies the login","scenario":"Successful login _2","scenarioId":"6b1dffc4","timestamp":"2026-02-14T14:42:40.076Z"}
+{"level":"info","message":"SCENARIO PASSED: Successful login _2","scenario":"Successful login _2","scenarioId":"6b1dffc4","timestamp":"2026-02-14T14:42:43.091Z"}
+{"level":"info","message":"START SCENARIO: Successful login","scenario":"Successful login","scenarioId":"53d6595e","timestamp":"2026-02-15T07:12:42.855Z"}
+{"level":"info","message":"STEP: user is on login page","scenario":"Successful login","scenarioId":"53d6595e","timestamp":"2026-02-15T07:12:44.704Z"}
+{"level":"info","message":"STEP: user logs in","scenario":"Successful login","scenarioId":"53d6595e","timestamp":"2026-02-15T07:12:47.176Z"}
+{"level":"info","message":"STEP: user verifies the login","scenario":"Successful login","scenarioId":"53d6595e","timestamp":"2026-02-15T07:12:48.467Z"}
+{"level":"info","message":"SCENARIO PASSED: Successful login","scenario":"Successful login","scenarioId":"53d6595e","timestamp":"2026-02-15T07:12:51.503Z"}
+{"level":"info","message":"START SCENARIO: Successful login _2","scenario":"Successful login _2","scenarioId":"4eeebd0a","timestamp":"2026-02-15T07:12:51.619Z"}
+{"level":"info","message":"STEP: user is on login page","scenario":"Successful login _2","scenarioId":"4eeebd0a","timestamp":"2026-02-15T07:12:52.149Z"}
+{"level":"info","message":"STEP: user logs in","scenario":"Successful login _2","scenarioId":"4eeebd0a","timestamp":"2026-02-15T07:12:54.668Z"}
+{"level":"info","message":"STEP: user verifies the login","scenario":"Successful login _2","scenarioId":"4eeebd0a","timestamp":"2026-02-15T07:12:55.854Z"}
+{"level":"info","message":"SCENARIO PASSED: Successful login _2","scenario":"Successful login _2","scenarioId":"4eeebd0a","timestamp":"2026-02-15T07:12:58.880Z"}
