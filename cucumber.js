@@ -1,18 +1,34 @@
 module.exports = {
   default: {
+    requireModule: ["ts-node/register"],
+
     require: [
-      'features/step-definitions/**/*.ts'
+      "src/world/**/*.ts",
+      "src/hooks/**/*.ts",
+      "features/step-definitions/**/*.ts"
     ],
-    requireModule: ['ts-node/register'],
+
+    paths: ["features/**/*.feature"],
+
     format: [
-      'progress',
-      'json:test-results/cucumber-report.json',
-      'allure-cucumberjs/reporter'
+      "progress",
+      "json:test-results/cucumber-report.json",
+      "allure-cucumberjs/reporter"
     ],
+
     formatOptions: {
-      snippetInterface: 'async-await'
+      resultsDir: "allure-results",
+      snippetInterface: "async-await"
     },
-    timeout: 30000,
+
+    parallel: process.env.PARALLEL
+      ? parseInt(process.env.PARALLEL)
+      : 1,
+
+    retry: process.env.RETRIES
+      ? parseInt(process.env.RETRIES)
+      : 0,
+
     publishQuiet: true
   }
 };
