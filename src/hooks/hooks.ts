@@ -3,9 +3,13 @@ import {
   After,
   BeforeStep,
   AfterStep,
-  Status
+  Status, setDefaultTimeout
 } from "@cucumber/cucumber";
 
+
+setDefaultTimeout(
+  process.env.TIMEOUT ? parseInt(process.env.TIMEOUT) : 60000
+);
 Before(async function (scenario) {
   const scenarioName = scenario.pickle.name;
   const scenarioId = scenario.pickle.id.substring(0, 8);
