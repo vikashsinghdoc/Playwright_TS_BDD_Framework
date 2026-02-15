@@ -1,3 +1,4 @@
+logs/
 node_modules/
 allure-report/
 allure-results/
@@ -7,4 +8,3 @@ dist/
 playwright-report/
 .vscode/
 .DS_Store/
-.logs/
