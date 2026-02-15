@@ -1,21 +1,17 @@
-import { Given, Then, When, setDefaultTimeout } from '@cucumber/cucumber';
-import { LoginPage } from '../../src/pages/LoginPage';
-import { testContext } from '../../src/fixture/testContext';
-import { ENV } from '../../config/env/env';
+import { Given, When, Then } from "@cucumber/cucumber";
+import { ENV } from "../../config/env/env";
 
-
-const login = () => new LoginPage(testContext.page);
-
-Given('user is on login page', async () => {
-  console.log('Navigating to:', ENV.BASE_URL);
-  await login().navigate(ENV.BASE_URL);
+Given("user is on login page", async function () {
+  await this.loginPage.navigate(ENV.BASE_URL);
 });
 
-When('user logs in', async () => {
-  console.log('Attempting to login...');
-  await login().login('test_email_admin@email.com','123456');
+When("user logs in", async function () {
+  await this.loginPage.login(
+    "test_email_admin@email.com",
+    "123456"
+  );
 });
 
-Then('user verifies the login', async () => {
-    await login().validateLogin()
-})
+Then("user verifies the login", async function () {
+  await this.loginPage.validateLogin();
+});
