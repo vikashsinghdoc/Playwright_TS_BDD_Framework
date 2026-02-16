@@ -1,5 +1,6 @@
-import { Given, When, Then } from "@cucumber/cucumber";
+import { Given, When, Then, And } from "../../src/support/frameworkSteps";
 import { ENV } from "../../config/env/env";
+
 
 Given("user is on login page", async function () {
   await this.loginPage.navigate(ENV.BASE_URL);
