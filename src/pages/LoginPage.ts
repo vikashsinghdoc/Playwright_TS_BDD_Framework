@@ -17,7 +17,7 @@ export class LoginPage extends BasePage {
 
   async validateLogin() {
     const logoutBtn= this.page.locator(".ico-logout")
-    this.highlight(logoutBtn)
+    this.highlightElement(logoutBtn)
     await expect(logoutBtn).toHaveText("Log out");
   }
 }
